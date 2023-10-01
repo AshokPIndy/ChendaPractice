@@ -1,0 +1,19 @@
+*** Setup the Melam with the items to play in the order you want
+*** Valid items supported are Nila, Urulukol, Idukol, TheeruKalasam
+*** Values are case sensitive. Do not use quotes.
+*** You can add multiple values in a single line separated by Spaces or Comma
+*** Blank lines can be added.
+*** Anything after a '*' in a line is ignored as comments.
+
+
+Nila, Nila, Urulukol ** Urulukol should follow a Nila
+
+Nila  Kalasam, 
+Idukol, Idukol, Kalasam,
+Idukol 
+TheeruKalasam  * Will switch to next Kalam after this
+
+Nila, Nila
+Kalasam
+Nila
+Idukol, Idukol

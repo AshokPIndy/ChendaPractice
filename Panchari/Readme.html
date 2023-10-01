@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .hdr-grid{
+                display: grid;
+                grid-template-rows: 128px 40px;
+                grid-template-columns: 50px repeat(8, 1fr) 50px;
+            }
+            .hdr-img {
+                grid-column-start: 2;
+                grid-column-end: 5;
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+            .hdr-title {
+                grid-column: 3/8;
+                grid-row: 1/2;
+            }
+            body {
+                font-size: 1.3vw;
+                background-color: lightcyan;
+            }
+        </style>
+    </head>
+    <body style="border: 20px;">
+        <div class="hdr-grid">
+            <img class="hdr-img" src="../Resources/Chenda Image.png" width="128px" height="128px" style="display: inline-block;"/>
+            <h2 class="hdr-title" style="vertical-align: text-bottom;" >Panchari Melam Help</h2>   
+        </div>
+        <div style="border: 30px;">
+            <h3>Introduction</h3>
+            <p>You can follow the highlighted letters in Karaoke style to practice <b>Panchari Melam</b>. Be sure to use a large screen!</p>
+            <p>Before playing you need to load a Melam, which is just a text file specifying what to play for each <b>Thalavattam</b>. like Nila, Idukol etc. You can download a sample 
+                <a href="./Sample Melam.txt" download="Sample Melam.txt"><b><u>here</u></b></a>.</p>
+            <p>The page will <b>NOT</b> validate if the melam is valid. If invalid, it will not work properly.</p>
+            <p>Melam will start in 3rd Kalam and will switch to 4th after Theerukalam</p>
+            <br>
+            <p>Speed of 48 will play 2 thalavattams of 3rd kalam in approximately one minute.  </p>
+        </div>
+    </body>
+</html>
