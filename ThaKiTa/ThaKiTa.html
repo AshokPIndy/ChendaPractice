@@ -1,0 +1,374 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .container{
+                display: grid;
+                grid-template-columns: 20px repeat(24, 1fr) 20px;
+            }
+
+            .hdr-grid{
+                display: grid;
+                grid-template-rows: 128px 40px;
+                grid-template-columns: 50px repeat(8, 1fr) 50px;
+            }
+
+            .hdr-img {
+                grid-column-start: 2;
+                grid-column-end: 6;
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+
+            .hdr-buttons{   grid-column: 2/3; grid-row:2/3  }
+            .hdr-speed{   grid-column: 3/4; grid-row:2/3; vertical-align: bottom;  }
+            .hdr-sound{   grid-column: 4/5; grid-row:2/3; vertical-align: bottom;  }
+            .hdr-level{   grid-column: 5/6; grid-row:2/3; vertical-align: bottom;  }
+            .hdr-help{   grid-column: 6/7; grid-row:1/2; vertical-align: bottom;  }
+        
+            .hdr-title {
+                grid-column: 3/8;
+                grid-row: 1/2;
+            }
+
+            body {
+                font-size: 0.9vw;
+                background-color: lightcyan;
+            }
+
+            .row{
+                grid-column: span 26;
+            }
+
+            button{
+                margin: 20px;
+            }
+
+            .hilite {
+                background-color: yellow;
+            }
+
+            .bold {
+                font-weight: bold;
+            }
+
+            .switch {
+                 position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+        </style>
+    </head>
+    <body>
+        <div style="height: 20px;">
+            <h1>&nbsp;</h1>
+         </div>
+        <div class="hdr-grid">
+            <img class="hdr-img" src="../Resources/Chenda Image.png" width="128px" height="128px" style="display: inline-block;"/>
+            <h1 class="hdr-title" style="vertical-align: text-bottom;" >Sadhakam</h1>   
+            <button class="hdr-help" onclick="location.href='./Readme.html'" style="height: 30px; width: 80px;">Read Me!</button>
+            <div class="hdr-buttons">
+                <button onclick="play()" style="height: 30px; width: 60px;">Play</button>
+                <button onclick="stop()" style="height: 30px; width: 60px;">Stop</button> 
+            </div> 
+            <div class="hdr-speed">
+                <br>
+                <label style="height: 30px;">Speed: </label>
+                <input type="range" id=speed min="30" max="80" value="48" oninput="setSpeed(value)"/>
+                <output id="speedvalue">48</output>                
+            </div>
+            <div class="hdr-sound">
+                <br>
+                <label style="height: 30px;">Play Sound </label>
+                <label class="switch" style="vertical-align: middle;">
+                <input type="checkbox" id="SoundToggle" onclick="soundToggle()">
+                <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="hdr-level" id="levelSelector" style="visibility: hidden;">
+                <br>
+                <label for="maxSpeed">Max Level:</label>
+                <select id="maxSpeed" onchange="setLevel()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+ 
+
+        <div class="container">
+            <div class="row" style="height: 30px;" >&nbsp;</div>
+            <div class="row" style="height: 30px;" >&nbsp;</div>
+            <div class="row" style="height: 30px;" >&nbsp;</div>
+
+            <div>&nbsp;</div>
+            <div class="item bold" id="r_1_1">Tha</div>
+            <div class="item" id="r_1_2">.</div>
+            <div class="item" id="r_1_3">.</div>
+            <div class="item" id="r_1_4">.</div>
+            <div class="item" id="r_1_5">.</div>
+            <div class="item" id="r_1_6">.</div>
+            <div class="item" id="r_1_7">.</div>
+            <div class="item" id="r_1_8">.</div>
+            <div class="item" id="r_1_9">Ki</div>
+            <div class="item" id="r_1_10">.</div>
+            <div class="item" id="r_1_11">.</div>
+            <div class="item" id="r_1_12">.</div>
+            <div class="item" id="r_1_13">.</div>
+            <div class="item" id="r_1_14">.</div>
+            <div class="item" id="r_1_15">.</div>
+            <div class="item" id="r_1_16">.</div>
+            <div class="item" id="r_1_17">Ta</div>
+            <div class="item" id="r_1_18">.</div>
+            <div class="item" id="r_1_19">.</div>
+            <div class="item" id="r_1_20">.</div>
+            <div class="item" id="r_1_21">.</div>
+            <div class="item" id="r_1_22">.</div>
+            <div class="item" id="r_1_23">.</div>
+            <div class="item" id="r_1_24">.</div>
+            <div>&nbsp;</div> 
+
+            <div class="row" style="height: 30px;">&nbsp;</div>
+
+            <div>&nbsp;</div>
+            <div class="item bold" id="r_2_1">Tha</div>
+            <div class="item" id="r_2_2">.</div>
+            <div class="item" id="r_2_3">.</div>
+            <div class="item" id="r_2_4">.</div>
+            <div class="item" id="r_2_5">Ki</div>
+            <div class="item" id="r_2_6">.</div>
+            <div class="item" id="r_2_7">.</div>
+            <div class="item" id="r_2_8">.</div>
+            <div class="item" id="r_2_9">Ta</div>
+            <div class="item" id="r_2_10">.</div>
+            <div class="item" id="r_2_11">.</div>
+            <div class="item" id="r_2_12">.</div>
+            <div class="item bold" id="r_2_13">Tha</div>
+            <div class="item" id="r_2_14">.</div>
+            <div class="item" id="r_2_15">.</div>
+            <div class="item" id="r_2_16">.</div>
+            <div class="item" id="r_2_17">Ki</div>
+            <div class="item" id="r_2_18">.</div>
+            <div class="item" id="r_2_19">.</div>
+            <div class="item" id="r_2_20">.</div>
+            <div class="item" id="r_2_21">Ta</div>
+            <div class="item" id="r_2_22">.</div>
+            <div class="item" id="r_2_23">.</div>
+            <div class="item" id="r_2_24">.</div>
+            <div>&nbsp;</div> 
+
+            <div class="row" style="height: 30px;">&nbsp;</div>
+             
+            <div>&nbsp;</div>
+            <div class="item bold" id="r_3_1">Tha</div>
+            <div class="item" id="r_3_2">.</div>
+            <div class="item" id="r_3_3">Ki</div>
+            <div class="item" id="r_3_4">.</div>
+            <div class="item" id="r_3_5">Ta</div>
+            <div class="item" id="r_3_6">.</div>
+            <div class="item bold" id="r_3_7">Tha</div>
+            <div class="item" id="r_3_8">.</div>
+            <div class="item" id="r_3_9">Ki</div>
+            <div class="item" id="r_3_10">.</div>
+            <div class="item" id="r_3_11">Ta</div>
+            <div class="item" id="r_3_12">.</div>
+            <div class="item bold" id="r_3_13">Tha</div>
+            <div class="item" id="r_3_14">.</div>
+            <div class="item" id="r_3_15">Ki</div>
+            <div class="item" id="r_3_16">.</div>
+            <div class="item" id="r_3_17">Ta</div>
+            <div class="item" id="r_3_18">.</div>
+            <div class="item bold" id="r_3_19">Tha</div>
+            <div class="item" id="r_3_20">.</div>
+            <div class="item" id="r_3_21">Ki</div>
+            <div class="item" id="r_3_22">.</div>
+            <div class="item" id="r_3_23">Ta</div>
+            <div class="item" id="r_3_24">.</div>
+            <div>&nbsp;</div> 
+            
+            <div class="row" style="height: 30px;">&nbsp;</div>
+             
+            <div>&nbsp;</div>
+            <div class="item bold" id="r_4_1">Tha</div>
+            <div class="item" id="r_4_2">Ki</div>
+            <div class="item" id="r_4_3">Ta</div>
+            <div class="item bold" id="r_4_4">Tha</div>
+            <div class="item" id="r_4_5">Ki</div>
+            <div class="item" id="r_4_6">Ta</div>
+            <div class="item bold" id="r_4_7">Tha</div>
+            <div class="item" id="r_4_8">Ki</div>
+            <div class="item" id="r_4_9">Ta</div>
+            <div class="item bold" id="r_4_10">Tha</div>
+            <div class="item" id="r_4_11">Ki</div>
+            <div class="item" id="r_4_12">Ta</div>
+            <div class="item bold" id="r_4_13">Tha</div>
+            <div class="item" id="r_4_14">Ki</div>
+            <div class="item" id="r_4_15">Ta</div>
+            <div class="item bold" id="r_4_16">Tha</div>
+            <div class="item" id="r_4_17">Ki</div>
+            <div class="item" id="r_4_18">Ta</div>
+            <div class="item bold" id="r_4_19">Tha</div>
+            <div class="item" id="r_4_20">Ki</div>
+            <div class="item" id="r_4_21">Ta</div>
+            <div class="item bold" id="r_4_22">Tha</div>
+            <div class="item" id="r_4_23">Ki</div>
+            <div class="item" id="r_4_24">Ta</div>
+            <div>&nbsp;</div> 
+        </div>
+
+        <script>
+            const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+            const Tha = new Audio('Tha.mp3');
+            const Ki = new Audio('Ki.mp3');
+            const Ta = new Audio('Ta.mp3');
+
+            var animate = false;
+            var delay = 208.33;
+            var repeatNo = 4;    
+            var currentLevel = 1;
+            var maxLevel = 3;
+            var incr = 1;
+            var playSound = false;
+
+            async function play(){
+                animate = true;
+                var maxRows = 4;
+                var maxColumns = 24;
+                var c = 1;
+                var loopCnt = 1;
+                // var tt = Date.now();
+                while (animate && c <= maxColumns){
+                    var r = 1
+
+                    while (r <= maxRows){
+                        divId = "r_" + r + "_" + c;
+                        document.getElementById(divId).classList.add("hilite");
+                        r++;
+                        if (playSound) {
+                            if (currentLevel == 1) {
+                                if (c == 1) Tha.play();
+                                if (c == 9) Ki.play();
+                                if (c == 17) Ta.play();
+                            }
+                            if (currentLevel == 2) {
+                                if (c % 12 == 1) Tha.play();
+                                if (c % 12 == 5 ) Ki.play();
+                                if (c % 12 == 9) Ta.play();
+                            }
+                            if (currentLevel == 3) {
+                                if (c % 6 == 1) Tha.play();
+                                if (c % 6 == 3 ) Ki.play();
+                                if (c % 6 == 5) Ta.play();                        }
+                            if (currentLevel == 4) {
+                                if (c % 3 == 1) Tha.play();
+                                if (c % 3 == 2 ) Ki.play();
+                                if (c % 3 == 0) Ta.play();  
+                            }
+                        }
+                    }
+                    await sleep(delay);
+                    // tk = Date.now();
+                    // td = tk - tt;
+                    // tt = tk;
+                    // console.log(c + " " + td);
+
+                    r = 1;
+                    while (r <= maxRows){
+                        divId = "r_" + r + "_" + c;
+                        document.getElementById(divId).classList.remove("hilite");
+                        r++;
+                    }
+                    c++;
+                    if (c > maxColumns) {
+                        c = 1;
+                        loopCnt++;
+                        if (loopCnt > repeatNo)
+                        {
+                                currentLevel = currentLevel + incr;
+                                loopCnt = 1;
+                        }
+                        if (currentLevel >= maxLevel) {incr = -1; currentLevel = maxLevel;}
+                        if (currentLevel <= 1) {incr = 1; currentLevel = 1;}
+                    }
+                }
+            }
+            
+            function stop(){
+                animate = false;
+            }
+
+            function setLevel(){
+                maxLevel = document.getElementById("maxSpeed").value;
+            }
+            
+            function setSpeed(value){
+                document.getElementById("speedvalue").value = value ; 
+                //delay = 416.67*(24/value);
+                delay = 60000/(value*8);
+            }
+
+            function soundToggle(){
+                playSound = document.getElementById("SoundToggle").checked;
+                if (playSound) document.getElementById("levelSelector").style.visibility="visible";
+                  else document.getElementById("levelSelector").style.visibility="hidden";
+            }
+        </script>
+    </body>
+</html>

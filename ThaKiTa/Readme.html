@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .hdr-grid{
+                display: grid;
+                grid-template-rows: 128px 40px;
+                grid-template-columns: 50px repeat(8, 1fr) 50px;
+            }
+            .hdr-img {
+                grid-column-start: 2;
+                grid-column-end: 5;
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+            .hdr-title {
+                grid-column: 3/8;
+                grid-row: 1/2;
+            }
+            body {
+                font-size: 1.3vw;
+                background-color: lightcyan;
+            }
+        </style>
+    </head>
+    <body style="border: 20px;">
+        <div class="hdr-grid">
+            <img class="hdr-img" src="Chenda Image.png" width="128px" height="128px" style="display: inline-block;"/>
+            <h2 class="hdr-title" style="vertical-align: text-bottom;" >Sadhakam Help</h2>   
+        </div>
+        <div style="border: 30px;">
+            <h3>Introduction</h3>
+            <p>You can follow the highlighted letters to practice <b>Sadhakam</b>. The sound will play at each <b>kalam</b> 5 times before going up or down to the next kalam. <span style="color: red;">
+            Sounds may overlap in 4th Kalam.</span></p>
+            <br>
+            <p>Speed of 48 will be same speed as playing 48 beats of Panchari Melam in approximately one minute.  </p>
+        </div>
+    </body>
+</html>
