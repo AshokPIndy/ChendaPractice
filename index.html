@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .container{
+                display: grid;
+                grid-template-columns: 20px 2fr 20fr 20px;
+            }
+
+            .hdr-grid{
+                display: grid;
+                grid-template-rows: 128px 40px;
+                grid-template-columns: 50px repeat(8, 1fr) 50px;
+            }
+
+            .hdr-img {
+                grid-column-start: 2;
+                grid-column-end: 5;
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+
+            .hdr-title {
+                grid-column: 3/8;
+                grid-row: 1/2;
+            }
+
+            body {
+                font-size: 0.9vw;
+                background-color: lightcyan;
+            }
+
+            .blankrow{
+                grid-column: span 4;
+            }
+
+            .row-item{
+                grid-column: 3/4;
+                font-size: 1.5vw;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div style="height: 20px;">
+            <h1>&nbsp;</h1>
+         </div>
+        <div class="hdr-grid">
+            <img class="hdr-img" src="./Resources/Chenda Image.png" width="128px" height="128px" style="display: inline-block;"/>
+            <h1 class="hdr-title" style="vertical-align: text-bottom;" >Welcome to Chenda Practice!!!</h1>   
+        </div>
+ 
+
+        <div class="container">
+            <div class="blankrow" style="height: 30px;" >&nbsp;</div>
+            <div class="blankrow" style="height: 30px;" >&nbsp;</div>
+            <a href="./ThaKiTa/ThaKiTa.html" class="row-item" ><h2></h2>Sadhakam (Tha Ki Ta)</h2></a>
+            <div class="blankrow" style="height: 30px;" >&nbsp;</div>
+            <div class="blankrow" style="height: 30px;" >&nbsp;</div>
+            <a href="./Panchari/Panchari Melam.html" class="row-item">Panchari Melam</a>
+        </div>
+
+    </body>
+</html>
