@@ -11,7 +11,6 @@
       html, body, .container-fluid {
          height: 100%;
       }
-
       body {
          font-size: 0.9vw;
       }
@@ -19,11 +18,9 @@
          font-weight: bold;
          color: red;
       }
-
       .vt {
          font-style: italic;
       }
-
       .standout{
          font-weight: bold;
          color: red;
@@ -34,12 +31,10 @@
       body {
          background-color: lightcyan;
       }
-
       .main_container{
          display: grid;
          grid-template-columns: 9fr 1fr;
       }
-
       .active_container{
          display: grid;
          grid-template-columns: 9fr 1fr;
@@ -48,7 +43,6 @@
 </head>
 
 <body>
-
    <div class="container-fluid h-100">
       <div class="row" style="height: 20px;">
          <h1>&nbsp;</h1>
@@ -71,6 +65,10 @@
          <div class="col-1">
             <button onclick="stop()">Stop</button>
          </div>
+         <div class="col-1">
+              <button onclick="location.href='./Readme.html'">Read Me!</button>       
+         </div>
+
          <div class="col-3">
             <label>Speed: </label>
             <input type="range" id=speed min="30" max="80" value="48" oninput="setSpeed(value)"/>
