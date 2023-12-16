@@ -1787,7 +1787,13 @@
 
       var animate = false;
       var playlist = [];
+      var kalams = [];
       var reload = [false, false, false, false, false, false, false];
+
+      var tv_current, tv_prev, tv_next;
+
+      const Row0_default = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
+                    "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
 
 
       const Nila = ["Na",space,"Gu",space,   "Na",space,"Na",space,   "Gi",space,"Na",space,   "Na",space,"Gu",space,
@@ -1830,7 +1836,10 @@
 
       const idukol_kalasam3_4 = ["Gi",space,"Da",space,   "Da",space,"Gu",space,    "Da",space,"Gu",space,   "Na",space,"Na",space,
                            "Gu",space,space,space, "Du",space,space,space,  "du",space,space,space, "Du",space,space,space ];  
-      
+
+      const Idukol_kalasam_4_1 = ["Na",space,"Gu",space,   "Na",space,"Na",space,  "Gi",space,"Na",space,   "Na",space,"Gu",space,  
+                        "Du",space,space,space, "Du",space,space,space,  "du",space,space,space, "Du",space,space,space  ]; 
+     
       const TheeruKalasam3_2 = ["Gi",space,space,space,   "Dda",space,space,space, "Da",space,"Gu",space,   "Na",space,"Na",space,
                                  "Gi",space,space,space,  "Dda",space,space,space, "De",space,space,space,   space,space,space,space  ];
 
@@ -1902,6 +1911,7 @@
          document.getElementById(temp_row).style.removeProperty('background'); 
       }
 
+      // Load playlist(Melam) from file
       function getPlayList()
       {
          var fileSelect = document.createElement('input');
@@ -1918,6 +1928,7 @@
             // here we tell the reader what to do when it's done reading...
             reader.onload = readerEvent => {
                playlist = [];
+               kalams = [];
                var content = readerEvent.target.result; // this is the content!
                const allLines = content.split(/\r\n|\n/);
                allLines.forEach((line) => 
@@ -1927,7 +1938,8 @@
                   let tokens = line2.split(/[\s,]+/);
                   tokens.forEach((token) => {validateAndLoad(token.trim()); });
                   });
-               loadPlayList();       
+               loadPlayList();      
+
                loadNext(0,1);  
                loadNext(0,2);  
                loadNext(0,3);  
@@ -1940,22 +1952,28 @@
          fileSelect.click();
       }
 
+      // Validate Melam list 
       function validateAndLoad(playItem){
          if (playItem != "") {
             if (validItems.includes(playItem)) {
                if (playItem == "Urulukol" && (playlist.length == 0  || playlist[playlist.length - 1] != "Nila")) {
                   playlist.push("Nila");
+                  kalams.push(currentKalam);
                }
                if (playItem == "Idukol" && playlist.length > 0 && (playlist[playlist.length - 1] != "Idukol" && playlist[playlist.length - 1] != "Kalasam" )) {
                   playlist.push("Kalasam");
                }
                playlist.push(playItem);
+               kalams.push(currentKalam);
+
+               if (playItem == "TheeruKalasam") currentKalam++;
             }
             else 
                console.log("invalid item found" + playItem);
          }
       }
 
+      // Show melam to the page
       function loadPlayList() {
          i = 1;
          var ul = document.getElementById("play_list");
@@ -1976,16 +1994,34 @@
                alert("Load Melam before playing");
                return;
             }
+
             let tv = 0;
+            tv_prev = "";
+            tv_current = playlist[0];
+            currentKalam = kalams[0];
+            if (playlist.length > 1)  tv_next = playlist[1];
+               else tv_next = "";
+
+            // animate row 0   
             animate=true; 
             time = Date.now();
             await animateRow(0, delay);
             document.getElementById("row_0").style.visibility="hidden";
+            
             while (tv < playlist.length){
+   
+               // tv_prev = tv_current;
+               // tv_current = tv_next;
+               // if (i + 1 < playlist.length) tv_next = playlist[i + 1];
+               //    else tv_next = "";
+
+               //  Highlight the current item
                i = tv + 1;
                let current_thalavttom = "playlist_" + i;
                document.getElementById(current_thalavttom).classList.add("active");
+
                let row=1; 
+               [max_rows, max_sections] = setRowCount(tv);
                while (row <= max_rows && animate) { 
 
                   if (playlist[tv] == "TheeruKalasam" && row == 3) {
@@ -2010,22 +2046,58 @@
             MelamLoaded = false;
       };
       
+      function setRowCount(tv) {
+         switch (kalams[tv]) {
+            case 3 :
+                   rows = 6;
+                   sections = 4;
+                   break;
+
+            case 4 :
+               switch (playlist[tv]) {
+                  case "Nila" :
+                  case "Kalasam" :
+                  case "Idukol" :
+                    rows = 3;
+                    break;
+                  case "Urulukol" : 
+                  case "TheeruKalasam" : 
+                    rows = 6;  
+               }
+               sections = 4;
+               break;
+
+             default: 
+                console.log (`Kalam {kalams[tv]} not supported `);
+                throw new Error("An error occurred") ;
+         }
+         return [rows, sections]
+      }
+     
       function updateRow(tv, row){
-         if (playlist[tv] != playlist[tv+1]) {
-            let current_row = "row_" + row;
-            if (tv < playlist.length - 1) 
-               document.getElementById(current_row).style.visibility="hidden";  
+         if (tv < playlist.length - 1) {
+            
+            [rowsNext, s] = setRowCount(tv+1)     
+            if (row > rowsNext) {
+               let current_row = "row_" + row;              
+               document.getElementById(current_row).style.visibility="hidden";
+            }
+            else {
+             loadNext(tv + 1,row);                
+             let current_row = "row_" + row;              
+             document.getElementById(current_row).style.visibility="visible";
+            if (row == max_rows && rowsNext > max_rows) {
+               let k = row + 1
+               while (k <= rowsNext) {
+                  loadNext(tv + 1, k)
+                  let current_row = "row_" + k;              
+                  document.getElementById(current_row).style.visibility="visible";
+                  k++;
+               } 
+            }
+            }
          }
-
-         if (tv < playlist.length) loadNext(tv + 1,row);
-
          
-         prev_row = row - 1;
-         if (prev_row == 0) prev_row = rowsInNext;
-         if (prev_row <= rowsInNext) {
-            previous_row = "row_" + prev_row;
-            document.getElementById(previous_row).style.visibility="visible";      
-         }
       }
 
       function loadNext(tv,row){
@@ -2035,7 +2107,7 @@
             }
          }
          else {
-            if (nextKalam == 3) {
+            if (kalams[tv] == 3) {
                switch(playlist[tv]) {
                   case "Nila" : 
                      loadNila3(tv, row);
@@ -2049,13 +2121,19 @@
                   case "Idukol" : 
                      loadIdukol3(tv, row);
                      break;
+                  case "TheeruKalasam" : 
+                     loadTheeruKalasam3(row);
+                     break;
                }
  //              loadThalam3(tv+1, row);
             }
-            if (nextKalam == 4) {
+            if (kalams[tv] == 4) {
                switch(playlist[tv]){
                   case "Nila" :
                      loadNila4(tv, row);
+                     break;
+                  case "Urulukol" :
+                     loadUrulukol4(row);
                      break;
                   case "Kalasam" : 
                      loadKalasam4(row);
@@ -2090,7 +2168,18 @@
                loadRow(2,"t",thal4_2);
                break;
             case 3: 
-               loadRow(3,"v",Nila);
+               if (tv < playlist.length - 1 && playlist[tv + 1] == "Urulukol")
+                  {
+                    loadRow(3,"v",Urulukol_3_6_pre);
+                    document.getElementById("v_3_1_1").classList.add("standout");
+                    document.getElementById("v_3_1_3").classList.add("standout");
+                    document.getElementById("v_3_1_5").classList.add("standout");
+                    document.getElementById("v_3_1_7").classList.add("standout");
+                  }
+               else
+                  {
+                    loadRow(3,"v",Nila);
+                  }
                if (playlist[tv + 1] == "Kalasam") loadRow(3,"t",thal_kalasam); else loadRow(3,"t",thal4_3);
                break;
          }
@@ -2099,11 +2188,20 @@
       function loadKalasam4(row){
          switch(row) {
             case 1: 
-               loadRow(1,"v",Kalasam_4);
-               loadRow(1,"t",thal_kalasam);
-               document.getElementById("v_1_1_1").classList.add("standout");
-               document.getElementById("v_1_1_3").classList.add("standout");
-               document.getElementById("v_1_1_5").classList.add("standout");
+               if (!idukolStarted) {
+                  loadRow(1,"v",Kalasam_4);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_1_1").classList.add("standout");
+                  document.getElementById("v_1_1_3").classList.add("standout");
+                  document.getElementById("v_1_1_5").classList.add("standout");                  
+               }
+               else {
+                  loadRow(1,"v",Idukol_kalasam_4_1);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_3_1").classList.add("standout");
+                  document.getElementById("v_1_3_5").classList.add("standout");                  
+               }
+
                break;
             case 2: 
                loadRow(2,"v",Kalasam_5);
@@ -2113,6 +2211,39 @@
                loadRow(3,"v",Kalasam_6);
                loadRow(3,"t",thal_kalasam);
                break;
+         }
+      }
+
+      function loadUrulukol4(row){
+         let v = "v";
+         switch (row){
+            case 1: loadRow(1,v,Urulukol_1);
+                    loadRow(1,"t",thal4_1);
+                    document.getElementById("v_1_2_1").classList.add("standout");
+                     break;
+            case 2: loadRow(2,v,Urulukol_2);
+                     loadRow(1,"t",thal3_2);
+                     document.getElementById("v_2_1_1").classList.add("standout");
+                     document.getElementById("v_2_4_1").classList.add("standout");
+                     break;
+            case 3: loadRow(3,v,Urulukol_3);
+                     loadRow(3,"t",thal_kalasam);
+                     document.getElementById("v_3_3_1").classList.add("standout");
+                     break;
+            case 4: loadRow(4,v,Urulukol_4);
+                     loadRow(4,"t",thal_kalasam);
+                     document.getElementById("v_4_2_1").classList.add("standout");
+                     document.getElementById("v_4_2_5").classList.add("standout");
+                     document.getElementById("v_4_2_6").classList.add("standout");
+                     document.getElementById("v_4_2_7").classList.add("standout");
+                     document.getElementById("v_4_2_8").classList.add("standout");
+                     break;
+            case 5: loadRow(5,v,Kalasam_5);
+                     loadRow(5,"t",thal_kalasam);
+                     break;
+            case 6: loadRow(6,v,Kalasam_6);
+                     loadRow(6,"t",thal_kalasam);
+                     break;
          }
       }
 
@@ -2338,10 +2469,10 @@
       }
 
       function loadRow(row, id_prefix, values){
-         i = 0;
-         j = 1;
+         let i = 0;
+         let j = 1;
          while (j <= max_sections) {
-            k = 1;
+            let k = 1;
             while (k <= max_columns) {
                element = id_prefix + "_" + row + "_" + j + "_" + k;
                document.getElementById(element).innerHTML = values[i]; 
