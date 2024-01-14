@@ -4,8 +4,10 @@
 *** You can add multiple values in a single line separated by Spaces or Comma
 *** Blank lines can be added.
 *** Anything after a '*' in a line is ignored as comments.
+*** By default Melam starts in 3rd Kalam, but you can change by the "Start n" command at the beginning
 
 
+Start 3       ** start at Kalam 4
 Nila, Nila, Urulukol ** Urulukol should follow a Nila
 
 Nila  Kalasam, 
