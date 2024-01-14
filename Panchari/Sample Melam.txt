@@ -7,7 +7,7 @@
 *** By default Melam starts in 3rd Kalam, but you can change by the "Start n" command at the beginning
 
 
-Start 3       ** start at Kalam 4
+Start 3       ** start at Kalam 3
 Nila, Nila, Urulukol ** Urulukol should follow a Nila
 
 Nila  Kalasam, 
