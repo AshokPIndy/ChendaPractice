@@ -1596,8 +1596,6 @@
       var timep;
       let tokens = [];
       let tokenIndex = 0;
-      let tokens = [];
-      let tokenIndex = 0;
 
       var animate = false;
       var playlist = [];
@@ -1709,12 +1707,6 @@
       const thal_end = [t_o,spacet,spacet,spacet, spacet,spacet,spacet,spacet, t_o,spacet,spacet,spacet, spacet,spacet,spacet,spacet,  
                        t_o,spacet,spacet,spacet, spacet,spacet,spacet,spacet, spacet,spacet,spacet,spacet,   spacet,spacet,spacet,spacet];
 
-      const thal5_1 = [t_o,space,space,space, space,space,space,space, t_o,space,space,space, space,space,space,space,  
-                       t_o,space,space,space, space,space,space,space, space,space,space,space,   space,space,space,space];
-
-      const thal5_2 = [t_o,space,space,space, space,space,space,space, t_o,space,space,space, space,space,space,space,  
-                       t_s,space,space,space, space,space,space,space, space,space,space,space,   space,space,space,space];
-
       const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
       var delay = 60000 / (48*8);
@@ -1784,8 +1776,6 @@
                   {
                   let line2 = line.trim();
                   if (line2.indexOf("*") > -1) line2 = line2.substr(0,line2.indexOf("*"));
-                  let tkns = line2.split(/[\s,]+/);
-                  tkns.forEach((token) => {if (token.trim() != "") tokens.push(token)});
                   let tkns = line2.split(/[\s,]+/);
                   tkns.forEach((token) => {if (token.trim() != "") tokens.push(token)});
                   });
