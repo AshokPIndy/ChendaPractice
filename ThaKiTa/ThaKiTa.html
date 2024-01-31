@@ -302,25 +302,9 @@ input:checked + .slider:before {
                         document.getElementById(divId).classList.add("hilite");
                         r++;
                         if (playSound) {
-                            if (currentLevel == 1) {
-                                if (c == 1) Tha.play();
-                                if (c == 9) Ki.play();
-                                if (c == 17) Ta.play();
-                            }
-                            if (currentLevel == 2) {
-                                if (c % 12 == 1) Tha.play();
-                                if (c % 12 == 5 ) Ki.play();
-                                if (c % 12 == 9) Ta.play();
-                            }
-                            if (currentLevel == 3) {
-                                if (c % 6 == 1) Tha.play();
-                                if (c % 6 == 3 ) Ki.play();
-                                if (c % 6 == 5) Ta.play();                        }
-                            if (currentLevel == 4) {
-                                if (c % 3 == 1) Tha.play();
-                                if (c % 3 == 2 ) Ki.play();
-                                if (c % 3 == 0) Ta.play();  
-                            }
+                            if (c == 1) Tha.play();
+                            if (c == 9) Ki.play();
+                            if (c == 17) Ta.play();
                         }
                     }
                     await sleep(delay);
@@ -336,17 +320,17 @@ input:checked + .slider:before {
                         r++;
                     }
                     c++;
-                    if (c > maxColumns) {
-                        c = 1;
-                        loopCnt++;
-                        if (loopCnt > repeatNo)
-                        {
-                                currentLevel = currentLevel + incr;
-                                loopCnt = 1;
-                        }
-                        if (currentLevel >= maxLevel) {incr = -1; currentLevel = maxLevel;}
-                        if (currentLevel <= 1) {incr = 1; currentLevel = 1;}
-                    }
+                    // if (c > maxColumns) {
+                    //     c = 1;
+                    //     loopCnt++;
+                    //     if (loopCnt > repeatNo)
+                    //     {
+                    //             currentLevel = currentLevel + incr;
+                    //             loopCnt = 1;
+                    //     }
+                    //     if (currentLevel >= maxLevel) {incr = -1; currentLevel = maxLevel;}
+                    //     if (currentLevel <= 1) {incr = 1; currentLevel = 1;}
+                    // }
                 }
             }
             

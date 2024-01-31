@@ -1,19 +1,36 @@
 *** Setup the Melam with the items to play in the order you want
-*** Valid items supported are Nila, Urulukol, Idukol, TheeruKalasam
 *** Values are case sensitive. Do not use quotes.
 *** You can add multiple values in a single line separated by Spaces or Comma
 *** Blank lines can be added.
 *** Anything after a '*' in a line is ignored as comments.
 
+*** Below is a sample melam with all supported items.
+Start 3                                                 *** You can start at Kalam 3, 4, or 5. This must be the first line.
+Nila, Nila, Urulukol
+Nila, Nila, Urulukol
+Nila, Nila, Kalasam
+Nila, Nila, Kalasam
+Idukol, Idukol, Kalasam
+Idukol, Idukol, Kalasam
+Idukol, Idukol, TheeruKalasam                           *** System will switch to next Kalam after TheeruKalasam
 
-Nila, Nila, Urulukol ** Urulukol should follow a Nila
+**** If you want to start at Kalam 4, delete all lines between Start and this and change 3 to 4 in start line.
+Nila, Nila, Nila, Urulukol
+Nila, Nila, Nila, Urulukol
+Nila, Nila, Nila, Kalasam
+Nila, Nila, Nila, Kalasam
+Idukol, Idukol, Idukol,  Kalasam
+Idukol, Idukol, Idukol,  Kalasam
+Idukol, Idukol, Idukol, TheeruKalasam                    *** System will switch to next Kalam after TheeruKalasam
 
-Nila  Kalasam, 
-Idukol, Idukol, Kalasam,
-Idukol 
-TheeruKalasam  * Will switch to next Kalam after this
+**** If you want to start at Kalam 5, delete all lines between Start and this and change 3 to 5 in start line.
+Nila, Nila, Nila, Nila, Kalasam                          *** System will switch to next version of Nila after each Kalasam (may change in future)      
+Nila, Nila, Nila, Nila, Kalasam
+Nila, Nila, Nila, Nila, Kalasam
+Nila, Nila, Nila, Nila, Kalasam                          *** If Nila comes again, it will stay in the 4th version.
+KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
+KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
+KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
+KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
 
-Nila, Nila
-Kalasam
-Nila
-Idukol, Idukol
+
