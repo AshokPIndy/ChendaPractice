@@ -1734,7 +1734,6 @@
 
    <script>
       // character constants
-      // character constants
       const space = '\xA0';
       const spacet = '\xA0';
       const t_c = "X" ;  // '\u2227' conjunction (logical AND ) is another option.
@@ -1743,14 +1742,12 @@
       const t_h = space;
 
       // default initital values
-      // default initital values
       var max_rows = 6;
       var currentKalam = 3;
       var MelamLoaded = false;
       var idukolStarted = false;  
       var kuzhamarichilStarted = false;
 
-      //global variables
       //global variables
       var time;
       var timep;
@@ -1759,12 +1756,37 @@
 
       var animate = false;
       var playlist = [];
+      var kalams = [];
+      var cols = [32, 32, 32, 32, 32, 32, 32];
       var reload = [false, false, false, false, false, false, false];
 
+      //Speed Change
+      var sc_row = 0; 
+      var sc_section = 0;
+      var sc_column = 0;
+      var sc_type = "";
 
+      // melam related
+      const validItems = ["Nila", "Urulukol", "Kalasam", "Idukol", "TheeruKalasam", "KuzhaMarichil"];
+      const Kalasams = ["Urulukol", "Kalasam"];
+
+      const Row0_default = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
+                    "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
+
+      const Row0_Kalam5 = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
+                    "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+
+      // Nila. Same for Kalam 3 & 4 all rows.
       const Nila = ["Na",space,"Gu",space,   "Na",space,"Na",space,   "Gi",space,"Na",space,   "Na",space,"Gu",space,
                     "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
 
+      const Nila_5_1 = ["Na",space,space,space,   "Da",space,space,space,   "De",space,space,space,   "Na",space,space,space,
+                     "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+
+      const Nila_5_2 = ["Na",space,"Ga",space,   "Da",space,space,space,   "De",space,space,space,   "Na",space,space,space,
+                     "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+
+      // Nila before urulukol starts - Kalam 3/rows 6 or Kalam 4 row 3.
       const Urulukol_3_6_pre = ["Na",space,"Gu",space, "Da",space,"Gu",space,  "Da",space,"Gu",space, "Da",space,"Gu",space,
                                 "De",space,space,space,   "Na","Na","Gi","Na", "Na","Gu","Na","Na",     "Gi","Na","Na","Gu" ];
                         
@@ -1788,6 +1810,9 @@
 
       const Kalasam_6 = [ "Na",space,"Gu",space,   "De",space,space,space,    "Da","Da","Gu","Da","Da","Gu","Na","Na",
                            "Gu",space,space,space, "Du",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
+
+      const Kalasam_5_1 = ["Na",space,"Gu",space,   "Da",space,"Gu",space,  "De",space,space,space,   "Na","Gu","Na","Na",  
+                           "Gu",space,space,space, "Du",space,space,space,  "du",space,space,space, "Du",space,space,space  ]; 
 
       const Kalasam_end = [ "Na",space,"Gu",space,   "De",space,space,space,    "Da","Da","Gu","Da","Da","Gu","Na","Na",
                            "Gu",space,space,space, space,space,space,space,  space,space,space,space,   space,space,space,space ];
@@ -1877,24 +1902,21 @@
       }
 
       async function animateRow (row, delay) {
-         let columns = cols[row];
+         let max_columns = cols[row];
          let temp_row = "row_" + row;
          document.getElementById(temp_row).style.backgroundColor = "lightgray" ; 
 
-         while (section <= max_sections && animate) { 
-            let element=1;
-            while (element <= max_columns && animate) {
-               divid="div_" + row + "_" + section + "_" + element;
-               document.getElementById(divid).style.backgroundColor = "yellow" ; 
-               timep = time;
-               time = Date.now();
-     //          await sleep(delay - (time - timep)); 
-               await sleep(delay);
-               document.getElementById(divid).style.removeProperty('background') ; 
-               element++; 
-            } 
-            section++; 
-         } ;
+         let element=1;
+         while (element <= max_columns && animate) {
+            divid="div_" + row + "_" +  element;
+            document.getElementById(divid).style.backgroundColor = "yellow" ; 
+            timep = time;
+            time = Date.now();
+   //          await sleep(delay - (time - timep)); 
+            await sleep(delay);
+            document.getElementById(divid).style.removeProperty('background') ; 
+            element++; 
+         } 
          document.getElementById(temp_row).style.removeProperty('background'); 
       }
 
