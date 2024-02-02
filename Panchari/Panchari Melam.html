@@ -1736,6 +1736,7 @@
       // character constants
       const space = '\xA0';
       const spacet = '\xA0';
+      const empty = '\xA0';
       const t_c = "X" ;  // '\u2227' conjunction (logical AND ) is another option.
       const t_o = '\u2713';  //'\u2228'  "vee" is another option;
       const t_s = '\u2014';
@@ -1747,6 +1748,7 @@
       var MelamLoaded = false;
       var idukolStarted = false;  
       var kuzhamarichilStarted = false;
+      var Nila5_version = 1;
 
       //global variables
       var time;
@@ -1774,17 +1776,20 @@
                     "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
 
       const Row0_Kalam5 = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
-                    "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+                    "Na",space,"Na",space,   "Gi",space,"Na",space, empty, empty,empty,empty, empty,empty,empty,empty ];
 
       // Nila. Same for Kalam 3 & 4 all rows.
       const Nila = ["Na",space,"Gu",space,   "Na",space,"Na",space,   "Gi",space,"Na",space,   "Na",space,"Gu",space,
                     "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
 
       const Nila_5_1 = ["Na",space,space,space,   "Da",space,space,space,   "De",space,space,space,   "Na",space,space,space,
-                     "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+                     "Na",space,"Na",space,   "Gi",space,"Na",space, empty,empty,empty,empty, empty,empty,empty,empty ];
 
       const Nila_5_2 = ["Na",space,"Ga",space,   "Da",space,space,space,   "De",space,space,space,   "Na",space,space,space,
-                     "Na",space,"Na",space,   "Gi",space,"Na",space, space,space,space,space, space,space,space,space ];
+                     "Na",space,"Na",space,   "Gi",space,"Na",space, empty,empty,empty,empty, empty,empty,empty,empty ];
+
+      const Nila_5_4 = ["Na",space,"Ga",space,   "De",space,space,space,   "Na",space,"Ga",space,   "Na",space,"Ga",space,
+                     "Na",space,"Na",space,   "Gi",space,"Na",space, empty,empty,empty,empty, empty,empty,empty,empty ];
 
       // Nila before urulukol starts - Kalam 3/rows 6 or Kalam 4 row 3.
       const Urulukol_3_6_pre = ["Na",space,"Gu",space, "Da",space,"Gu",space,  "Da",space,"Gu",space, "Da",space,"Gu",space,
@@ -1831,7 +1836,10 @@
 
       const Idukol_kalasam_4_1 = ["Na",space,"Gu",space,   "Na",space,"Na",space,  "Gi",space,"Na",space,   "Na",space,"Gu",space,  
                         "Du",space,space,space, "Du",space,space,space,  "du",space,space,space, "Du",space,space,space  ]; 
-     
+
+      const KuzhaMarichil = ["Na",space,"Gu",space,   "Na",space,"Na",space,  "Gi",space,"Na",space,   "Na",space,"Gu",space,  
+                        "Na",space,"Na",space, "Gi",space,"Na",space,  empty,empty,empty,empty, empty,empty,empty,empty  ]; 
+
       const TheeruKalasam3_2 = ["Gi",space,space,space,   "Dda",space,space,space, "Da",space,"Gu",space,   "Na",space,"Na",space,
                                  "Gi",space,space,space,  "Dda",space,space,space, "De",space,space,space,   space,space,space,space  ];
 
@@ -2077,7 +2085,6 @@
                while (row <= max_rows && animate) { 
                   await animateRow(row,delay);
                   updateRow(tv, row);  //update row for next one.
-                  updateRow(tv, row);  //update row for next one.
                   row++; 
                };   
 
@@ -2188,7 +2195,6 @@
               }
             }
             if (kalams[tv] == 4) {
-            if (kalams[tv] == 4) {
                switch(playlist[tv]){
                   case "Nila" :
                      loadNila4(tv, row);
@@ -2205,11 +2211,127 @@
                   case "TheeruKalasam" : 
                      loadTheeruKalasam4(tv, row);
                      break;
-
                   }
             }
-         }
+           if (kalams[tv] == 5) {
+               switch(playlist[tv]){
+                  case "Nila" :
+                     loadNila5(tv, row);
+                     break;
+                  // case "Urulukol" :
+                  //    loadUrulukol4(tv, row);
+                  //    break;
+                  case "Kalasam" : 
+                     loadKalasam5(tv, row);
+                     break;
+                  case "KuzhaMarichil" : 
+                     loadKuzhaMarichil(tv, row);
+                     break;
 
+                     // case "Idukol" : 
+                  //    loadIdukol4(tv, row);
+                  //    break;
+                  // case "TheeruKalasam" : 
+                  //    loadTheeruKalasam4(tv, row);
+                  //    break;
+                  }
+            }
+
+
+      }
+
+      function loadNila5(tv, row){
+         switch(row) {
+            case 1: 
+               if (kalams[tv - 1] == 4) {
+                  loadRow(1,"v",transition4to5_1);
+                  loadRow(1,"t",thal5_1);
+                  break;
+               }
+               switch (Nila5_version) {
+                  case 1:
+                  case 2:
+                     loadRow(1,"v", Nila_5_1);
+                     loadRow(1,"t", thal5_1);
+                     break;
+                  case 3:
+                     loadRow(1,"v", Nila_5_2);
+                     loadRow(1,"t", thal5_1);
+                     break;
+                  case 4:
+                     loadRow(1,"v", Nila_5_4);
+                     loadRow(1,"t", thal5_1);
+                     break;
+               }
+               break;
+            case 2: 
+               if (kalams[tv - 1] == 4) {
+                     loadRow(2,"v",transition4to5_2);
+                     loadRow(2,"t",thal5_2);
+                     break;
+                  }
+                  switch (Nila5_version) {
+                     case 1:
+                        loadRow(2,"v", Nila_5_1);
+                        break;
+                     case 2:
+                     case 3:
+                        loadRow(2,"v", Nila_5_2);
+                        break;
+                     case 4:
+                        loadRow(2,"v", Nila_5_4);
+                        break;
+                  }
+                  if (playlist[tv + 1] == "Kalasam") loadRow(2,"t",thal5_1); else loadRow(2,"t",thal5_2);
+                  break;
+         }
+         cols[row] = 24;
+      }
+
+      function loadKuzhaMarichil(tv, row){
+         kuzhamarichilStarted = true;
+         switch(row) {
+            case 1: 
+               loadRow(1,"v", KuzhaMarichil);
+               loadRow(1,"t", thal5_1);
+               break;
+            case 2: 
+               loadRow(2,"v",KuzhaMarichil);
+               if (playlist[tv + 1] == "Kalasam") loadRow(2,"t",thal5_1); else loadRow(2,"t",thal5_2);
+               break;
+         }
+         cols[row] = 24;
+      }
+
+
+      function loadKalasam5(tv, row){
+         switch(row) {
+            case 1: 
+               if (Nila5_version < 4) Nila5_version++;  
+               if (kuzhamarichilStarted) {
+                  loadRow(1,"v",Idukol_kalasam_4_1);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_17").classList.add("standout");
+                  document.getElementById("v_1_21").classList.add("standout");
+               }
+               else {
+                  loadRow(1,"v",Kalasam_5_1);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_1").classList.add("standout");
+                  document.getElementById("v_1_3").classList.add("standout");
+                  document.getElementById("v_1_5").classList.add("standout");
+               }
+               break;
+            case 2: 
+               loadRow(2,"v",Kalasam_5);
+               loadRow(2,"t",thal_kalasam);
+               break;
+            case 3: 
+               loadRow(3,"v",Kalasam_6);
+               loadRow(3,"t",thal_kalasam);
+               break;
+         }
+         cols[row] = 32;
       }
 
       function loadNila4(tv, row){
@@ -2297,11 +2419,19 @@
       function loadKalasam4(tv, row){
          switch(row) {
             case 1: 
-               loadRow(1,"v",Kalasam_4);
-               loadRow(1,"t",thal_kalasam);
-               document.getElementById("v_1_1_1").classList.add("standout");
-               document.getElementById("v_1_1_3").classList.add("standout");
-               document.getElementById("v_1_1_5").classList.add("standout");
+               if (idukolStarted) {
+                  loadRow(1,"v",Idukol_kalasam_4_1);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_17").classList.add("standout");
+                  document.getElementById("v_1_21").classList.add("standout");
+               }
+               else {
+                  loadRow(1,"v",Kalasam_4);
+                  loadRow(1,"t",thal_kalasam);
+                  document.getElementById("v_1_1").classList.add("standout");
+                  document.getElementById("v_1_3").classList.add("standout");
+                  document.getElementById("v_1_5").classList.add("standout");
+               }
                break;
             case 2: 
                loadRow(2,"v",Kalasam_5);
@@ -2330,11 +2460,10 @@
                         document.getElementById("v_1_21").classList.add("standout");
                         document.getElementById("v_1_23").classList.add("standout");
                     }                  
-                     break;
-            case 2: loadRow(2,"v",idukol4_2);
-
-                    loadRow(2,"t",thal4_2);
                     idukolStarted = true;
+                    break;
+            case 2: loadRow(2,"v",idukol4_2);
+                    loadRow(2,"t",thal4_2);
                      break;
             case 3: loadRow(3,"v",idukol_2);
                      loadRow(3,"t",thal4_3);

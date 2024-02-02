@@ -1,21 +1,14 @@
-Start 3
-Nila, Nila, Urulukol
-Nila, Nila, Urulukol
-Nila, Nila, Kalasam
-Nila, Nila, Kalasam
-Idukol, Idukol, Kalasam
-Idukol, Idukol, Kalasam
+Start 4
+*Nila, Nila, Urulukol
+*Nila, Nila, Kalasam
+*Idukol, Idukol, Kalasam
+*Idukol, Idukol, TheeruKalasam
+*Nila, Nila, Nila, Urulukol
+*Nila, Nila, Nila, Kalasam
+*Idukol, Idukol, Idukol, Kalasam
 Idukol, Idukol, TheeruKalasam
-Nila, Nila, Nila, Urulukol
-Nila, Nila, Nila, Urulukol
-Nila, Nila, Nila, Kalasam
-Nila, Nila, Nila, Kalasam
-Idukol, Idukol, Idukol, Kalasam
-Idukol, Idukol, Idukol, Kalasam
-Idukol, Idukol, Idukol, TheeruKalasam
 Nila, Nila, Nila, Nila, Kalasam
 Nila, Nila, Nila, Nila, Kalasam
 Nila, Nila, Nila, Nila, Kalasam
 Nila, Nila, Nila, Nila, Kalasam
-KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam 
 KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam 
