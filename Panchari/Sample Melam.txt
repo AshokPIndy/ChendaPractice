@@ -15,7 +15,6 @@ Idukol, Idukol, Kalasam
 Idukol, Idukol, Kalasam
 Idukol, Idukol, TheeruKalasam                           *** System will switch to next Kalam after TheeruKalasam
 
-<<<<<<< HEAD
 **** If you want to start at Kalam 4, delete all lines between Start and this and change 3 to 4 in start line.
 Nila, Nila, Nila, Urulukol
 Nila, Nila, Nila, Urulukol
@@ -34,9 +33,5 @@ KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
 KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
 KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
 KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, KuzhaMarichil, Kalasam
-=======
-Start 3       ** start at Kalam 3
-Nila, Nila, Urulukol ** Urulukol should follow a Nila
->>>>>>> 3b74e9c011a47aa6165245714394c4ff6b136b91
 
 
