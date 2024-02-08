@@ -7,6 +7,7 @@
 
 *** Below is a sample melam with all supported items.
 Start 3                                                 *** You can start at Kalam 3, 4, or 5. This must be the first line.
+Kalam                                                   *** If starting with "Kalam", this must be the first item; Supported only for 3rd.
 Nila, Nila, Urulukol
 Nila, Nila, Urulukol
 Nila, Nila, Kalasam
