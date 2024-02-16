@@ -1767,6 +1767,7 @@
       var sc_section = 0;
       var sc_column = 0;
       var sc_type = "";
+      var Sc_increment = 6;
 
       // melam related
       const validItems = ["Nila", "Urulukol", "Kalasam", "Idukol", "TheeruKalasam", "KuzhaMarichil", "Kalam"];
@@ -1936,11 +1937,11 @@
          while (element <= max_columns && animate) {
             divid="div_" + row + "_" +  element;
             document.getElementById(divid).style.backgroundColor = "yellow" ; 
-            timep = time;
             time = Date.now();
    //          await sleep(delay - (time - timep)); 
             await sleep(delay);
             document.getElementById(divid).style.removeProperty('background') ; 
+            timep = Date.now();
             element++; 
          } 
          document.getElementById(temp_row).style.removeProperty('background'); 
@@ -2093,6 +2094,7 @@
                alert("Load Melam before playing");
                return;
             }
+            timep = time;
 
             let tv = 0;
             tv_current = playlist[0];
