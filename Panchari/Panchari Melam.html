@@ -1779,22 +1779,25 @@
       const Row0_Kalam5 = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
                     "Na",space,"Na",space,   "Gi",space,"Na",space, empty, empty,empty,empty, empty,empty,empty,empty ];
 
-      const Row0_Kalam = ["3",".",".",".",   "2",".",".",".",   "1",".",".",".",   "Go",".",".",".",
-                  "De",space,space,space,   "Na",space,space,space, "Na",space,space,space, "Na",space,space,space ];
+      const Row0_Kalam = ["3",".",".",".",   ".", ",", ",", ",", "2",".",".",".",  ".", ",", ",", ",",
+                          "1",".",".",".",   ".", ",", ",", ",", "Go",".",".",".", ".", ",", ",", ","];
 
-      const Kalam3_1 = ["De",space,space,space,   "Na",space,"Na",space,   "Na",space,space,space,   "Da",space,space,space,
-                    "Da",space,space,space, "Da",space,space,space,  "De",space,space,space,   "Na",space,space,space ];
+      const Kalam3_1 = [ "De",space,space,space,  space,space,space,space,  "Na",space,space,space, space,space,space,space,
+                         "Na",space,space,space,  space,space,space,space, "Na",space,space,space, space,space,space,space, ];
 
-      const Kalam3_2 = ["Na",space,space,space,   "Na",space,space,space,   "Na",space,space,space,   "Da",space,space,space,
+      const Kalam3_2 = ["De",space,space,space,   "Na",space,"Na",space,   "Na",space,space,space,   "Da",space,space,space,
                     "Da",space,space,space, "Da",space,space,space,  "De",space,space,space,   "Na",space,space,space ];
 
       const Kalam3_3 = ["Na",space,space,space,   "Na",space,space,space,   "Na",space,space,space,   "Da",space,space,space,
+                    "Da",space,space,space, "Da",space,space,space,  "De",space,space,space,   "Na",space,space,space ];
+
+      const Kalam3_4 = ["Na",space,space,space,   "Na",space,space,space,   "Na",space,space,space,   "Da",space,space,space,
                     "Da",space,space,space, "Da",space,space,space,  "De",space,space,space,   "Na",space,"Na",space ];
 
-      const Kalam3_4 = ["De",space,space,space,   "Na",space,"Na",space,   "De",space,space,space,   "Na",space,space,space,
+      const Kalam3_5 = ["De",space,space,space,   "Na",space,"Na",space,   "De",space,space,space,   "Na",space,space,space,
                     "De",space,space,space, "Na",space,space,space,  "De",space,space,space,   "Na",space,space,space ];
 
-      const Kalam3_5 = ["De",space,space,space,   "Na",space,space,space,   "De",space,space,space,   "Na",space,space,space,
+      const Kalam3_6 = ["De",space,space,space,   "Na",space,space,space,   "De",space,space,space,   "Na",space,space,space,
                      "Dun",space,space,space, "De",space,space,space,  "Na",space,"Na",space,   "Gi",space,"Na",space ];
 
       // Nila. Same for Kalam 3 & 4 all rows.
@@ -1928,7 +1931,8 @@
          delay = 60000/(value*8);
       }
 
-      async function animateRow (row, delay) {
+      async function animateRow (row, Delay) {
+//         console.log(`Row ${row} Delay ${Delay}`)
          let max_columns = cols[row];
          let temp_row = "row_" + row;
          document.getElementById(temp_row).style.backgroundColor = "lightgray" ; 
@@ -1938,11 +1942,17 @@
             divid="div_" + row + "_" +  element;
             document.getElementById(divid).style.backgroundColor = "yellow" ; 
             time = Date.now();
-   //          await sleep(delay - (time - timep)); 
-            await sleep(delay);
-            document.getElementById(divid).style.removeProperty('background') ; 
+//            console.log(time);
+//            console.log(Delay - (time - timep))
+          await sleep(Delay - (time - timep)); 
+            //await sleep(Delay);
+//            console.log(`Row ${row} Col ${element}  Delay ${Date.now() - timep}`)
             timep = Date.now();
+//            console.log(timep);
+
+            document.getElementById(divid).style.removeProperty('background') ; 
             element++; 
+            if (row == sc_row && element == sc_column) adjust_speed();
          } 
          document.getElementById(temp_row).style.removeProperty('background'); 
       }
@@ -2146,8 +2156,7 @@
          switch (kalams[tv]) {
             case "3" :
             case 3 :
-               if (playlist[tv] == "Kalam") rows = 5; 
-               else     rows = 6;
+               rows = 6;
                break;
 
             case "4" :
@@ -2369,6 +2378,7 @@
             case 3: 
                loadRow(3,"v",Kalasam_6);
                loadRow(3,"t",thal_kalasam);
+               sc_row = 6; sc_column = 25; sc_type = "+";
                break;
          }
          cols[row] = 32;
@@ -2480,6 +2490,7 @@
             case 3: 
                loadRow(3,"v",Kalasam_6);
                loadRow(3,"t",thal_kalasam);
+               sc_row = 3; sc_column = 25; sc_type = "+";
                break;
          }
       }
@@ -2533,7 +2544,7 @@
                      break;
             case 6: 
                   if (tv < playlist.length - 1) {
-                     loadRow(6,"v",Kalasam_6);
+                     loadRow(6,"v",TheeruKalasam3_6);
                      loadRow(6,"t",thal_kalasam);
                      sc_row = 6; sc_column = 21; sc_type = "-";
                      document.getElementById("v_6_21").classList.add("standout");
@@ -2566,6 +2577,9 @@
                break;
             case 5:
                loadRow(5, "v", Kalam3_5); 
+               break;
+            case 6:
+               loadRow(6, "v", Kalam3_6); 
                break;
             }
          cols[row] = 32;
@@ -2774,7 +2788,7 @@
                      break;
             case 6: 
                   if (tv < playlist.length - 1) {
-                     loadRow(6,"v",Kalasam_6);
+                     loadRow(6,"v",TheeruKalasam3_6);
                      loadRow(6,"t",thal_kalasam);
                      sc_row = 6; sc_column = 21; sc_type = "-";
                      document.getElementById("v_6_21").classList.add("standout");
